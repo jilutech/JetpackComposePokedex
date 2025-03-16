@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
                     val navController = rememberNavController()
                     NavHost(
-                        navController = navController, startDestination = "pokemon_list",
+                        navController = navController, startDestination = "pokemon_list_screen",
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable("pokemon_list_screen") {

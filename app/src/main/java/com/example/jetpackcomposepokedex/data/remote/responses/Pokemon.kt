@@ -7,7 +7,7 @@ data class Pokemon(
     val forms: List<Form>,
     val game_indices: List<GameIndice>,
     val height: Int,
-    val held_items: List<HeldItem>,
+    val held_items: List<Any?>,
     val id: Int,
     val is_default: Boolean,
     val location_area_encounters: String,

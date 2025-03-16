@@ -3,8 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android) // Correct usage of Hilt plugin
-    kotlin("kapt") // Needed for annotation processing
-
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -40,6 +39,11 @@ android {
     buildFeatures {
         compose = true
     }
+    kotlin {
+        sourceSets.configureEach {
+            kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+        }
+    }
 }
 
 dependencies {
@@ -61,7 +65,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+//    kapt(libs.hilt.compiler) REMOVED
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging)
@@ -72,12 +76,18 @@ dependencies {
     implementation(libs.coil.compose) // If using Jetpack Compose
     implementation(libs.coil.svg)     // If you need SVG support
     implementation(libs.coil.gif)     // If you need GIF support
-
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+//    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+
 }
 
 // Enable correct Hilt annotation processing
-kapt {
-    correctErrorTypes = true
-}
+//kapt {
+//    correctErrorTypes = true
+//}
