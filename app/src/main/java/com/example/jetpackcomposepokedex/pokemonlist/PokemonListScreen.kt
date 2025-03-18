@@ -33,7 +33,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.palette.graphics.Palette
 import com.example.jetpackcomposepokedex.R
+import com.example.jetpackcomposepokedex.data.model.PokeListEntry
 
 
 @Composable
@@ -97,3 +99,13 @@ fun searchBar(
         }
     }
 }
+//@Composable
+//fun PokeEntry(
+//    entry : PokeListEntry,
+//    navController: NavController,
+//    modifier: Modifier = Modifier,
+//    viewmodel : PokemonListVM = nav
+//){
+//
+//}
+
