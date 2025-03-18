@@ -14,7 +14,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,40 +48,51 @@ fun PokemonListScreen(
         Column {
             Spacer(modifier = Modifier.height(20.dp))
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = R.drawable.ic_international_pok_mon_logo),
                 contentDescription = "pokemon",
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)
             )
+            searchBar(
+                hint = "Search...",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp))
 
         }
     }
+}
+@Composable
+fun searchBar(
+    modifier: Modifier = Modifier,
+    hint: String = "",
+    onSearch: (String) -> Unit = {}
+) {
+    var text by remember { mutableStateOf("") }
 
-    @Composable
-    fun searchBar(
-        modifier: Modifier = Modifier,
-        hint: String = "",
-        onSearch: (String) -> Unit = {}
-    ) {
-        var text by remember { mutableStateOf("") }
-
-        var isHintDisplayed by remember {
-            mutableStateOf(hint != "")
-        }
+    var isHintDisplayed by remember {
+        mutableStateOf(hint != "")
+    }
 
 
-        Box(modifier = Modifier) {
-            BasicTextField(value = text, onValueChange = {
-                text = it
-                onSearch(it)
-            },
-                maxLines = 1, singleLine = true, textStyle = TextStyle(Color.Black),
-                modifier = Modifier.fillMaxWidth().shadow(5.dp, CircleShape)
-                    .padding(horizontal = 20.dp, vertical = 12.dp)
-                    .onFocusChanged { focus ->
-                        isHintDisplayed = !focus.isFocused && text.isEmpty()
-                    }
+    Box(modifier) {
+        BasicTextField(value = text, onValueChange = {
+            text = it
+            onSearch(it)
+        },
+            maxLines = 1, singleLine = true, textStyle = TextStyle(Color.Black),
+            modifier = Modifier.fillMaxWidth().shadow(5.dp, CircleShape)
+                .padding(horizontal = 20.dp, vertical = 12.dp)
+                .onFocusChanged { focus ->
+                    isHintDisplayed = !focus.isFocused && text.isEmpty()
+                }
+        )
+        if (isHintDisplayed) {
+            Text(
+                text = hint,
+                color = Color.LightGray,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
             )
         }
     }

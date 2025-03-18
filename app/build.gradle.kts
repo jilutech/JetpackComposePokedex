@@ -84,6 +84,8 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation ("androidx.palette:palette:1.0.0")
+
 
 }
 
