@@ -2,8 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt.android) // Correct usage of Hilt plugin
-    alias(libs.plugins.ksp)
+//    alias(libs.plugins.hilt.android) // Correct usage of Hilt plugin
+//    alias(libs.plugins.ksp)
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -39,11 +41,11 @@ android {
     buildFeatures {
         compose = true
     }
-    kotlin {
-        sourceSets.configureEach {
-            kotlin.srcDir("build/generated/ksp/${name}/kotlin")
-        }
-    }
+//    kotlin {
+//        sourceSets.configureEach {
+//            kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+//        }
+//    }
 }
 
 dependencies {
@@ -64,7 +66,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.hilt.android)
+//    implementation(libs.hilt.android)
+//    ksp(libs.hilt.compiler)
 //    kapt(libs.hilt.compiler) REMOVED
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
@@ -79,13 +82,20 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 //    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation ("androidx.palette:palette:1.0.0")
 
+//    ksp("androidx.room:room-compiler:2.51.1")
+    ksp ("com.google.dagger:dagger-compiler:2.51.1") // Dagger compiler
+    ksp ("com.google.dagger:hilt-compiler:2.51.1" )  // Hilt compiler
+
+    implementation ("com.google.dagger:hilt-android:2.51.1")
+
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.51.1") // or the latest version
 
 }
 

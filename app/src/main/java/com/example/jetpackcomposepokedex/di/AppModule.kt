@@ -16,17 +16,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
     @Singleton
     @Provides
-    fun providesPokemonRepo(api: PokeApi) = PokeMonRepo(api)
+    fun providePokemonRepository(
+        api: PokeApi
+    ) = PokeMonRepo(api)
 
-    fun providePokemonAPi():PokeApi{
+    @Singleton @Provides
+    fun providePokeApi(): PokeApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
             .create(PokeApi::class.java)
     }
-
 }

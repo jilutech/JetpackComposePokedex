@@ -7,13 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
+
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +19,9 @@ import androidx.navigation.navArgument
 import com.example.jetpackcomposepokedex.pokemonlist.PokemonListScreen
 import com.example.jetpackcomposepokedex.ui.theme.JetpackComposePokedexTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.jetpackcomposepokedex.pokemonlist.PokemonListVM
+import androidx.hilt.navigation.compose.hiltViewModel
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -31,13 +31,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposePokedexTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController, startDestination = "pokemon_list_screen",
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable("pokemon_list_screen") {
+//                            val viewModel: PokemonListVM = hiltViewModel()
                             PokemonListScreen(navController)
                         }
                         composable("pokemon_detail_screen/{dominantColor}/{pokemonName}",
