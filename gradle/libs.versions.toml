@@ -9,7 +9,7 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 composeBom = "2025.03.01"
-dagger-hilt = "2.51.1"
+palette = "1.0.0"
 retrofit = "2.11.0"
 okhttp = "4.12.0"
 timber = "5.0.1"
@@ -21,10 +21,12 @@ serialization = "1.6.3"
 
 kotlin = "2.0.0"
 ksp = "2.0.10-1.0.24"
+dagger-hilt = "2.51.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-palette = { module = "androidx.palette:palette", version.ref = "palette" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -38,9 +40,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt"}
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
@@ -55,15 +54,14 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil"}
 
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
+ksp-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref =  "dagger-hilt"}
+ksp-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref =  "dagger-hilt"}
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref =  "dagger-hilt"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-#kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-#kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt"}
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

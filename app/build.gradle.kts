@@ -2,10 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-//    alias(libs.plugins.hilt.android) // Correct usage of Hilt plugin
-//    alias(libs.plugins.ksp)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt.android )
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -41,11 +39,6 @@ android {
     buildFeatures {
         compose = true
     }
-//    kotlin {
-//        sourceSets.configureEach {
-//            kotlin.srcDir("build/generated/ksp/${name}/kotlin")
-//        }
-//    }
 }
 
 dependencies {
@@ -65,10 +58,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-//    implementation(libs.hilt.android)
-//    ksp(libs.hilt.compiler)
-//    kapt(libs.hilt.compiler) REMOVED
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging)
@@ -81,25 +70,15 @@ dependencies {
     implementation(libs.coil.gif)     // If you need GIF support
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
-//    implementation(libs.hilt)
-
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    implementation ("androidx.palette:palette:1.0.0")
-
+    implementation (libs.androidx.palette)
 //    ksp("androidx.room:room-compiler:2.51.1")
-    ksp ("com.google.dagger:dagger-compiler:2.51.1") // Dagger compiler
-    ksp ("com.google.dagger:hilt-compiler:2.51.1" )  // Hilt compiler
-
-    implementation ("com.google.dagger:hilt-android:2.51.1")
+    ksp (libs.ksp.dagger.compiler) // Dagger compiler
+    ksp (libs.ksp.hilt.compiler )  // Hilt compiler
+    implementation (libs.dagger.hilt.android)
 
 //    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.51.1") // or the latest version
 
 }
-
-// Enable correct Hilt annotation processing
-//kapt {
-//    correctErrorTypes = true
-//}
