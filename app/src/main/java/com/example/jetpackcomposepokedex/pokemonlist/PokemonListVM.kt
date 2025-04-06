@@ -13,7 +13,10 @@ import com.example.jetpackcomposepokedex.data.model.PokeListEntry
 import com.example.jetpackcomposepokedex.util.Constant.PAGE_SIZE
 import com.example.jetpackcomposepokedex.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
+import okhttp3.internal.filterList
 import java.util.Locale
 import javax.inject.Inject
 
@@ -31,10 +34,45 @@ class PokemonListVM @Inject constructor(
     var isLoading = mutableStateOf(false)
     var endReached = mutableStateOf(false)
 
+    private var cachedPokemonList = listOf<PokeListEntry>()
+    private var isSearchStarting = true
+    var isSearching = mutableStateOf(false)
+
+
+
+
+
     init {
         loadPokeMOnPaginated()
     }
 
+    fun pokemonSearchList(query : String){
+
+        var listToSearch =  if (isSearchStarting){
+            pokemonList.value
+        }else{
+            cachedPokemonList
+        }
+
+        viewModelScope.launch (Dispatchers.Default){
+            if (query.isEmpty()){
+                pokemonList.value = cachedPokemonList
+                isSearching.value = false
+                isSearchStarting = true
+                return@launch
+            }
+            var result = listToSearch.filter { pokemonListEntry ->
+                pokemonListEntry.pokemonName.contains(query.trim(),ignoreCase = true) ||
+                        pokemonListEntry.number.toString() == query.trim()
+            }
+            if (isSearchStarting){
+                cachedPokemonList = pokemonList.value
+                isSearchStarting = false
+            }
+            pokemonList.value = result
+            isSearching.value = true
+        }
+    }
     fun loadPokeMOnPaginated(){
 
         viewModelScope.launch {
@@ -76,4 +114,5 @@ class PokemonListVM @Inject constructor(
             }
         }
     }
+
 }
