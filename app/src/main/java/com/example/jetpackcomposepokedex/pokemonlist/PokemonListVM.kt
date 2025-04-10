@@ -15,8 +15,6 @@ import com.example.jetpackcomposepokedex.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-import okhttp3.internal.filterList
 import java.util.Locale
 import javax.inject.Inject
 
